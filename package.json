@@ -1,11 +1,11 @@
 {
 	"name": "jscodeshift-adapters",
-	"version": "1.0.0-beta.7",
+	"version": "1.0.0-beta.8",
 	"description": "jscodeshift adapters for various file types",
 	"type": "module",
 	"main": "./dist/cjs/index.cjs",
+	"types": "./dist/cjs/index.d.cts",
 	"module": "./dist/esm/index.js",
-	"types": "./dist/types/index.d.ts",
 	"files": [
 		"dist/"
 	],
@@ -43,7 +43,7 @@
 		"svelte": "^4.2.18"
 	},
 	"peerDependencies": {
-		"jscodeshift": "^0.15.0"
+		"jscodeshift": "^0.15.0 || ^0.16.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.7.0",
