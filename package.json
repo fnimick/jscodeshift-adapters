@@ -1,6 +1,6 @@
 {
 	"name": "jscodeshift-adapters",
-	"version": "1.0.0-beta.8",
+	"version": "1.0.0",
 	"description": "jscodeshift adapters for various file types",
 	"type": "module",
 	"main": "./dist/cjs/index.cjs",

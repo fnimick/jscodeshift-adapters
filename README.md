@@ -1,7 +1,8 @@
 # jscodeshift-adapters
 
 Run [jscodeshift](https://github.com/facebook/jscodeshift) on scripts contained in Svelte
-components, Vue components, and more. Additional adapter contributions are welcome!
+components, Vue components, and more. Supports both esmodule and commonjs projects. Additional
+adapter contributions are welcome!
 
 ## Install
 
@@ -49,7 +50,10 @@ See [jscodeshift readme](https://github.com/facebook/jscodeshift#usage-cli) for 
 
 Heavily inspired by Paul Salaets's
 [vue-jscodeshift-adapter](https://github.com/psalaets/vue-jscodeshift-adapter), copied and modified
-to support asynchronous transform functions.
+to support asynchronous transform functions and running in commonjs contexts.
+
+(@knighted/duel)[https://github.com/knightedcodemonkey/duel] for dual commonjs and esm build target
+support.
 
 ## License
 
