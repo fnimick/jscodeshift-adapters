@@ -17,7 +17,7 @@ export default {
 
 const output = `
 <script>
-export default {};
+const foo = 'bar';
 </script>
 
 <style>
@@ -27,4 +27,4 @@ export default {};
 </style>
 `;
 
-testTransform(transform, "Widget.vue", input, output);
+testTransform(transform, "Widget.svelte", input, output);

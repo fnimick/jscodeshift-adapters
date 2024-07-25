@@ -4,7 +4,7 @@
 import type { FileInfo, JSCodeshift, Options } from "jscodeshift";
 import type { TestOptions } from "jscodeshift/src/testUtils.js";
 import { createRequire } from "module";
-import { TransformWithPromise } from "../../src/types/index.js";
+import { TransformWithPromise } from "../src/types/index.js";
 
 const require = createRequire(import.meta.url);
 
@@ -56,7 +56,7 @@ export async function runInlineTest(
 	options: Options,
 	input: FileInfo,
 	expectedOutput: string,
-	testOptions: TestOptions,
+	testOptions?: TestOptions,
 ) {
 	const output = await applyTransform(module, options, input, testOptions);
 	expect(output).toEqual(expectedOutput.trim());

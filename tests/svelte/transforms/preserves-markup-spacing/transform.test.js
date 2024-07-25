@@ -2,18 +2,19 @@ import { testTransform } from "../../../test-transform.js";
 import transform from "./transform.js";
 
 const input = `
-<template>
-  <div class="widget">
+<div>
+  <div
+    class="widget"
+    data-another="attribute"
+  >
     Hello {{name}}
   </div>
-</template>
+</div>
+
+<span>Even more!</span>
 
 <script>
-  const foo = 1;
-</script>
-
-<script setup>
-  const foo = 4;
+const foo = 42;
 </script>
 
 <style>
@@ -24,18 +25,19 @@ const input = `
 `;
 
 const output = `
-<template>
-  <div class="widget">
+<div>
+  <div
+    class="widget"
+    data-another="attribute"
+  >
     Hello {{name}}
   </div>
-</template>
+</div>
+
+<span>Even more!</span>
 
 <script>
-  const bar = 1;
-</script>
-
-<script setup>
-  const bar = 4;
+const foo = 'bar';
 </script>
 
 <style>
@@ -45,4 +47,4 @@ const output = `
 </style>
 `;
 
-testTransform(transform, "Widget.vue", input, output);
+testTransform(transform, "Widget.svelte", input, output);

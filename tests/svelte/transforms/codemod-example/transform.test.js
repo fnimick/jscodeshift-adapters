@@ -2,14 +2,8 @@ import { testTransform } from "../../../test-transform.js";
 import transform from "./transform.js";
 
 const input = `
-<template>
-  <div class="widget">
-    Hello {{name}}
-  </div>
-</template>
-
 <script>
-export default {
+export let foo = {
   props: {
     name: {
       type: String,
@@ -31,6 +25,10 @@ export default {
 };
 </script>
 
+<div class="widget">
+    Hello {{name}}
+</div>
+
 <style>
 .widget {
   color: red;
@@ -39,14 +37,8 @@ export default {
 `;
 
 const output = `
-<template>
-  <div class="widget">
-    Hello {{name}}
-  </div>
-</template>
-
 <script>
-export default {
+export let foo = {
   props: {
     name: {
       type: String,
@@ -69,6 +61,10 @@ export default {
 };
 </script>
 
+<div class="widget">
+    Hello {{name}}
+</div>
+
 <style>
 .widget {
   color: red;
@@ -76,4 +72,4 @@ export default {
 </style>
 `;
 
-testTransform(transform, "Widget.vue", input, output);
+testTransform(transform, "Widget.svelte", input, output);

@@ -2,14 +2,8 @@ import { testTransform } from "../../../test-transform.js";
 import transform from "./transform.js";
 
 const input = `
-<template>
-    <div>
-        <span />
-        
-    </div>
-</template>
 <script>
-    export default {
+    export let foo = {
         name: 'HasWhitespaceLines',
         
         data() {
@@ -21,19 +15,15 @@ const input = `
                 \`
             }
         },
-    }
+    };
 </script>
+
+<h1>Hello</h1>
 `;
 
 const output = `
-<template>
-    <div>
-        <span />
-        
-    </div>
-</template>
 <script>
-    export default {
+    export let oof = {
         eman: 'HasWhitespaceLines',
         
         atad() {
@@ -45,8 +35,10 @@ const output = `
                 \`
             };
         },
-    }
+    };
 </script>
+
+<h1>Hello</h1>
 `;
 
-testTransform(transform, "Widget.vue", input, output);
+testTransform(transform, "Widget.svelte", input, output);

@@ -1,4 +1,4 @@
-import { testTransform } from "../test-helper.js";
+import { testTransform } from "../../../test-transform.js";
 import transform from "./transform.js";
 
 const input = `

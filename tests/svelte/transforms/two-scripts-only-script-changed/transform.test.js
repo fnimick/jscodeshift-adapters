@@ -2,21 +2,19 @@ import { testTransform } from "../../../test-transform.js";
 import transform from "./transform.js";
 
 const input = `
-<template>
-  <div class="widget">
-    Hello {{name}}
-  </div>
-</template>
-
-<script setup>
+<script lang="ts" context="module">
   // unchanged
   const asdf = 10;
 </script>
 
-<script>
+<script lang="ts">
   // this changes
   const foo = 4;
 </script>
+
+<div class="widget">
+  Hello {{name}}
+</div>
 
 <style>
 .widget {
@@ -26,21 +24,19 @@ const input = `
 `;
 
 const output = `
-<template>
-  <div class="widget">
-    Hello {{name}}
-  </div>
-</template>
-
-<script setup>
+<script lang="ts" context="module">
   // unchanged
   const asdf = 10;
 </script>
 
-<script>
+<script lang="ts">
   // this changes
   const bar = 4;
 </script>
+
+<div class="widget">
+  Hello {{name}}
+</div>
 
 <style>
 .widget {
@@ -49,4 +45,4 @@ const output = `
 </style>
 `;
 
-testTransform(transform, "Widget.vue", input, output);
+testTransform(transform, "Widget.svelte", input, output);
