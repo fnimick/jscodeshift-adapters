@@ -1,8 +1,13 @@
+import { Options } from "jscodeshift";
 import { adaptHTML, adaptSvelte, adaptVue } from "./adapters/index.js";
 import { TransformWithPromise } from "./types/index.js";
 
-export function adapt(transform: TransformWithPromise): TransformWithPromise {
-	return function (...args: Parameters<TransformWithPromise>) {
+export function adapt<TransformOptions extends Options>(
+	transform: TransformWithPromise<TransformOptions>,
+): TransformWithPromise<TransformOptions> {
+	return function (
+		...args: Parameters<TransformWithPromise<TransformOptions>>
+	) {
 		const [fileInfo] = args;
 		if (fileInfo.path.endsWith(".vue")) {
 			// return adaptVueBase(transform)(...args);

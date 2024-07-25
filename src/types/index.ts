@@ -11,7 +11,7 @@ export type TransformWithPromise<TransformOptions extends Options = Options> = (
 	options: TransformOptions,
 ) => ReturnType<Transform> | Promise<ReturnType<Transform>>;
 
-export type Adapter<TransformOptions extends Options = Options> = (
+export type Adapter = <TransformOptions extends Options = Options>(
 	transform: TransformWithPromise<TransformOptions>,
 	...args: Parameters<TransformWithPromise<TransformOptions>>
 ) => ReturnType<TransformWithPromise<TransformOptions>>;
