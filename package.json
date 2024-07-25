@@ -1,29 +1,29 @@
 {
 	"name": "jscodeshift-adapters",
-	"version": "1.0.0-beta.5",
+	"version": "1.0.0-beta.6",
 	"description": "jscodeshift adapters for various file types",
 	"type": "module",
-	"main": "./lib/cjs/index.js",
-	"module": "./lib/esm/index.js",
-	"types": "./lib/types/index.d.ts",
+	"main": "./dist/cjs/index.cjs",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/types/index.d.ts",
 	"files": [
-		"lib/"
+		"dist/"
 	],
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
-			"types": "./lib/types/index.d.ts",
-			"require": "./lib/cjs/index.js",
-			"import": "./lib/esm/index.js",
-			"default": "./lib/esm/index.js"
+			"types": "./dist/types/index.d.ts",
+			"require": "./dist/cjs/index.cjs",
+			"import": "./dist/esm/index.js",
+			"default": "./dist/esm/index.js"
 		}
 	},
 	"scripts": {
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"build:clean": "rm -rf ./lib",
-		"build": "npm run build:clean && tsc -p tsconfig.all.json && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && tsc -p tsconfig.types.json",
+		"build:clean": "rm -rf ./dist",
+		"build": "npm run build:clean && tsc -p tsconfig.all.json && duel --dirs",
 		"prepublishOnly": "npm run build"
 	},
 	"author": "Francis Nimick <fnimick@gmail.com>",
@@ -48,6 +48,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.7.0",
+		"@knighted/duel": "^1.0.8",
 		"@types/eslint__js": "^8.42.3",
 		"@types/jest": "^29.5.12",
 		"@types/jscodeshift": "^0.11.11",
