@@ -1,6 +1,6 @@
 {
 	"name": "jscodeshift-adapters",
-	"version": "1.0.0-beta.3",
+	"version": "1.0.0-beta.4",
 	"description": "jscodeshift adapters for various file types",
 	"type": "module",
 	"exports": {
@@ -11,6 +11,9 @@
 			"default": "./lib/esm/*.js"
 		}
 	},
+	"files": [
+		"lib/"
+	],
 	"scripts": {
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"lint": "prettier --check . && eslint .",
@@ -37,7 +40,7 @@
 		"vue-sfc-descriptor-to-string": "^3.0.1"
 	},
 	"peerDependencies": {
-		"jscodeshift": "^0.16.1"
+		"jscodeshift": "^0.15.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.7.0",
