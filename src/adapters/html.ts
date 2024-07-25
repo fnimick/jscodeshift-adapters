@@ -18,6 +18,9 @@ export const adaptHTML: Adapter = async function adaptHTML(transform, ...args) {
 			),
 		),
 	);
+	if (newScripts.every((newScript) => !newScript)) {
+		return undefined;
+	}
 	zip(scripts, newScripts).forEach(([script, newScript]) => {
 		if (newScript) {
 			script.innerHTML = newScript;

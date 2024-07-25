@@ -69,6 +69,31 @@ function svelte({
 	return "\n" + source + "\n";
 }
 
+function html({
+	markup,
+	script,
+	secondScript,
+	style,
+}: {
+	markup?: string;
+	script?: string;
+	secondScript?: string;
+	style?: string;
+}) {
+	const source = [
+		secondScript
+			? `<script type="text/javascript">${secondScript}</script>`
+			: "",
+		script ? `<script>${script}</script>` : "",
+		markup ?? "",
+		style ? `<style>${style}</style>` : "",
+	]
+		.filter((content) => content)
+		.join("\n\n");
+
+	return "\n<html>\n" + source + "\n</html>\n";
+}
+
 function commonAdapterTests(fileInfo: FileInfo) {
 	test("passes source path as fileInfo.path", async () => {
 		const { source, path } = fileInfo;
@@ -173,6 +198,31 @@ describe("adapter api tests", () => {
 		commonAdapterTests({
 			source: "const b = 400;",
 			path: "util.js",
+		});
+	});
+
+	describe("ts files", () => {
+		test("passes ts content as fileInfo.source", async () => {
+			let js: string | null = null;
+			const adapted = adapter(function transform(fileInfo, api, options) {
+				js = fileInfo.source;
+			});
+
+			await adapted(
+				{
+					source: "const b = 400;",
+					path: "util.ts",
+				},
+				FAKE_API,
+				{},
+			);
+
+			expect(js).toBe("const b = 400;");
+		});
+
+		commonAdapterTests({
+			source: "const b = 400;",
+			path: "util.ts",
 		});
 	});
 
@@ -335,6 +385,69 @@ describe("adapter api tests", () => {
 		commonAdapterTests({
 			path: "Widget.svelte",
 			source: svelte({ markup, script, style }),
+		});
+	});
+
+	describe("html files", () => {
+		test("passes <script> content as fileInfo.source", async () => {
+			let source: string | null = null;
+			const adapted = adapter(function transform(fileInfo, api, options) {
+				source = fileInfo.source;
+			});
+
+			await adapted(
+				{
+					source: html({ markup, script, style }),
+					path: "Widget.html",
+				},
+				FAKE_API,
+				{},
+			);
+
+			expect(source).toBe(script);
+		});
+
+		test("runs on multiple script tags if multiple are present", async () => {
+			let runs = 0;
+			const adapted = adapter(function transform(fileInfo, api, options) {
+				runs += 1;
+			});
+
+			await adapted(
+				{
+					source: html({ markup, script, secondScript: script, style }),
+					path: "Widget.html",
+				},
+				FAKE_API,
+				{},
+			);
+
+			expect(runs).toBe(2);
+		});
+
+		test("is no-op and skips transform when there is no <script>", async () => {
+			let invokedTransform = false;
+			const adapted = adapter(function transform(fileInfo, api, options) {
+				invokedTransform = true;
+				return "var fail = 4;";
+			});
+
+			const result = await adapted(
+				{
+					source: html({ markup, style }),
+					path: "Widget.html",
+				},
+				FAKE_API,
+				{},
+			);
+
+			expect(result).toBe(undefined);
+			expect(invokedTransform).toBe(false);
+		});
+
+		commonAdapterTests({
+			path: "Widget.html",
+			source: html({ markup, script, style }),
 		});
 	});
 });
