@@ -7,7 +7,7 @@ adapter contributions are welcome!
 ## Install
 
 ```
-npm install jscodeshift-adapters
+npm install jscodeshift-adapters -D
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ The instructions below assume you're familiar with [jscodeshift](https://github.
 The source file will be updated appropriately based on the return value of your `transform()`.
 
 For files that do not have an appropriate script source (such as a `<script>` tag), your
-codemod will not be called and the source file will not be changed.\_
+codemod will not be called and the source file will not be changed.
 
 #### 1. Create wrapped transform function
 
@@ -52,7 +52,7 @@ Heavily inspired by Paul Salaets's
 [vue-jscodeshift-adapter](https://github.com/psalaets/vue-jscodeshift-adapter), copied and modified
 to support asynchronous transform functions and running in commonjs contexts.
 
-(@knighted/duel)[https://github.com/knightedcodemonkey/duel] for dual commonjs and esm build target
+[@knighted/duel](https://github.com/knightedcodemonkey/duel) for dual commonjs and esm build target
 support.
 
 ## License
