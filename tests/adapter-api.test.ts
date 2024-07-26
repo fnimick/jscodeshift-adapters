@@ -210,18 +210,18 @@ describe("adapter api tests", () => {
 
 			await adapted(
 				{
-					source: "const b = 400;",
+					source: "const b: number = 400;",
 					path: "util.ts",
 				},
 				FAKE_API,
 				{},
 			);
 
-			expect(js).toBe("const b = 400;");
+			expect(js).toBe("const b: number = 400;");
 		});
 
 		commonAdapterTests({
-			source: "const b = 400;",
+			source: "const b: number = 400;",
 			path: "util.ts",
 		});
 	});

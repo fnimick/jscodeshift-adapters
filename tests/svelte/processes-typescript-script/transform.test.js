@@ -3,7 +3,7 @@ import transform from "./transform.js";
 
 const input = `
 <script lang="ts">
-  const foo = 4;
+  const foo: number | undefined = 4;
   if (foo === 4) {
       console.log('yes');
   }
@@ -14,7 +14,7 @@ const input = `
 
 const output = `
 <script lang="ts">
-  const bar = 4;
+  const bar: number | undefined = 4;
   if (bar === 4) {
       console.log('yes');
   }
@@ -23,4 +23,4 @@ const output = `
 <h1>Hello</h1>
 `;
 
-testTransform(transform, "Widget.svelte", input, output);
+testTransform(transform, "Widget.svelte", input, output, {}, { parser: "tsx" });

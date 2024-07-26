@@ -9,6 +9,7 @@ export function testTransform(
 	input: string,
 	output: string,
 	options: Options = {},
+	testOptions?: TestOptions,
 ) {
 	const fileInfo = {
 		path,
@@ -16,6 +17,6 @@ export function testTransform(
 	};
 
 	it("transforms correctly", async () => {
-		await runInlineTest(transform, options, fileInfo, output);
+		await runInlineTest(transform, options, fileInfo, output, testOptions);
 	});
 }
