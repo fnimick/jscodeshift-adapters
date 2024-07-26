@@ -23,4 +23,4 @@ const output = `
 <h1>Hello</h1>
 `;
 
-testTransform(transform, "Widget.svelte", input, output, {}, { parser: "tsx" });
+testTransform(transform, "Widget.svelte", input, output);

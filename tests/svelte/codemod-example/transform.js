@@ -4,18 +4,12 @@ import adapt from "../../../src/index.js";
 export default adapt((fileInfo, api, options) => {
 	const j = api.jscodeshift;
 	const root = j(fileInfo.source);
-
 	root
 		.find(j.ExportNamedDeclaration)
 		.find(j.ObjectExpression)
-		.at(0)
-		.find(j.Property, (p) => {
-			return p.key.name === "props";
-		})
-		.find(j.Property)
-		.filter((p) => {
-			return p.parent.parent.node.key.name === "props";
-		})
+		.find(j.ObjectProperty, (p) => p.key.name === "props")
+		.find(j.ObjectExpression)
+		.find(j.ObjectProperty)
 		.find(j.ObjectExpression)
 		.forEach((o) => {
 			const requiredFlag = o.node.properties.find((p) => {

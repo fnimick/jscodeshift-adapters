@@ -14,11 +14,12 @@ npm install jscodeshift-adapters -D
 
 The instructions below assume you're familiar with [jscodeshift](https://github.com/facebook/jscodeshift).
 
-### Run a codemod on some `.js`, `.vue`, `.svelte`, and/or `.html` files
+### Run a codemod on some `.js`, `.ts`, `.vue`, `.svelte`, and/or `.html` files
 
 | When transforming | `fileInfo.source` will be  |
 | ----------------- | -------------------------- |
 | `.js`             | the contents of the file   |
+| `.ts`             | the contents of the file   |
 | `.vue`            | the contents of `<script>` |
 | `.svelte`         | the contents of `<script>` |
 | `.html`           | the contents of `<script>` |
@@ -41,10 +42,12 @@ export default adapt(someCodemod);
 #### 2. Run jscodeshift
 
 ```bash
-$ jscodeshift <path> -t my-transform.js --extensions js,html,svelte,vue
+$ jscodeshift <path> -t my-transform.js --extensions js,ts,html,svelte,vue --parser tsx
 ```
 
-See [jscodeshift readme](https://github.com/facebook/jscodeshift#usage-cli) for more info on jscodeshift CLI.
+See [jscodeshift readme](https://github.com/facebook/jscodeshift#usage-cli) for more info on
+jscodeshift CLI. Note that you must use the `tsx` parser or another parser that supports typescript
+for handling files which use typescript syntax.
 
 ## Acknowledgements
 

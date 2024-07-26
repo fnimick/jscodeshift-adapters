@@ -8,14 +8,9 @@ export default adapt((fileInfo, api, options) => {
 	root
 		.find(j.ExportDefaultDeclaration)
 		.find(j.ObjectExpression)
-		.at(0)
-		.find(j.Property, (p) => {
-			return p.key.name === "props";
-		})
-		.find(j.Property)
-		.filter((p) => {
-			return p.parent.parent.node.key.name === "props";
-		})
+		.find(j.ObjectProperty, (p) => p.key.name === "props")
+		.find(j.ObjectExpression)
+		.find(j.ObjectProperty)
 		.find(j.ObjectExpression)
 		.forEach((o) => {
 			const requiredFlag = o.node.properties.find((p) => {

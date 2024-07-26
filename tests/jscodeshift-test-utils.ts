@@ -19,7 +19,7 @@ export async function applyTransform(
 	module: TransformModule,
 	options: Options,
 	input: FileInfo,
-	testOptions: TestOptions = {},
+	testOptions: TestOptions = { parser: "tsx" },
 ) {
 	// Handle ES6 modules using default export for the transform
 	const transform = typeof module === "function" ? module : module.default;
