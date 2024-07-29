@@ -1,6 +1,6 @@
 {
 	"name": "jscodeshift-adapters",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "jscodeshift adapters for various file types",
 	"type": "module",
 	"main": "./dist/cjs/index.cjs",
@@ -12,10 +12,14 @@
 	"exports": {
 		"./package.json": "./package.json",
 		".": {
-			"types": "./dist/types/index.d.ts",
-			"require": "./dist/cjs/index.cjs",
-			"import": "./dist/esm/index.js",
-			"default": "./dist/esm/index.js"
+			"import": {
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			},
+			"require": {
+				"types": "./dist/cjs/index.d.cts",
+				"default": "./dist/cjs/index.cjs"
+			}
 		}
 	},
 	"scripts": {
@@ -23,7 +27,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"build:clean": "rm -rf ./dist",
-		"build": "npm run build:clean && tsc -p tsconfig.all.json && duel --dirs",
+		"build": "npm run build:clean && tsc -p tsconfig.all.json && duel --dirs && publint",
 		"prepublishOnly": "npm run build"
 	},
 	"author": "Francis Nimick <fnimick@gmail.com>",
@@ -39,6 +43,7 @@
 	"dependencies": {
 		"@vue/compiler-sfc": "^3.4.23",
 		"node-html-parser": "^6.1.13",
+		"publint": "^0.2.9",
 		"rambda": "^9.2.1",
 		"svelte": "^4.2.18"
 	},
